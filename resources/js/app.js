@@ -10,9 +10,11 @@ Vue.use(VueSweetalert2)
 import "sweetalert2/dist/sweetalert2.min.css"
 
 import App from './components/App.vue'
-import CommentsIndex from './components/Comments/Index.vue'
-import CommentsCreate from './components/Comments/Create.vue'
-import CommentsEdit from './components/Comments/Edit.vue'
+
+import Clients from './components/Clients/Client.vue'
+import CommentsCreate from './components/Clients/Create.vue'
+import SharedSpaces from './components/SharedSpaces/SharedSpace.vue'
+
 import Register from './components/Pages/Register.vue'
 import Login from './components/Pages/Login.vue'
 import Home from './components/Pages/Home.vue'
@@ -27,9 +29,9 @@ const router = new VueRouter({
       meta: {requiredAuth: false}
     },
     {
-      path: '/commentsIndex',
-      component: CommentsIndex,
-      name: 'comments.index',
+      path: '/clients',
+      component: Clients,
+      name: 'clients',
       meta: {requiredAuth: true}
     },
     {
@@ -39,9 +41,9 @@ const router = new VueRouter({
       meta: {requiredAuth: true}
     },
     {
-      path: '/comments/edit/:id',
-      component: CommentsEdit,
-      name: 'comments.edit',
+      path: '/sharedSpaces',
+      component: SharedSpaces,
+      name: 'sharedSpaces',
       meta: {requiredAuth: true}
     },
     {
@@ -64,7 +66,7 @@ router.beforeEach(async (to, from, next) => {
       return next();
     } else if (!to.meta.requiredAuth) {
       if (window.Laravel.isLoggedin) {
-        return next({ path: "/commentsIndex" });
+        return next({ path: "/clients" });
       }
     } else if (to.meta.requiredAuth) {
       if (!window.Laravel.isLoggedin) {
@@ -75,7 +77,7 @@ router.beforeEach(async (to, from, next) => {
     return next();
 });
 
-Vue.component('pagination', require('laravel-vue-pagination'));
+//Vue.component('pagination', require('laravel-vue-pagination'));
 
 const app = new Vue({
   el: '#app',

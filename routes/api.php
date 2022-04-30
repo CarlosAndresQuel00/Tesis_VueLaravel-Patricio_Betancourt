@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\SharedSpaceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +27,7 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
-Route::apiResource('comments', CommentController::class);
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::apiResource('clients', ClientController::class);
+    Route::apiResource('shared_spaces', SharedSpaceController::class);
+});

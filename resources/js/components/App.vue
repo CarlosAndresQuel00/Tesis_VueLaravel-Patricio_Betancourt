@@ -5,10 +5,10 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto" v-if="isLoggedIn">
                             <li class="nav-item">
-                                <router-link active-class="active-menu" exact :to="{ name: 'comments.index' }" class="nav-link">Comments List</router-link>
+                                <router-link active-class="active-menu" exact :to="{ name: 'clients' }" class="nav-link">Clientes</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link active-class="active-menu" exact :to="{ name: 'comments.create' }" class="nav-link">Create new comment</router-link>
+                                <router-link active-class="active-menu" exact :to="{ name: 'sharedSpaces' }" class="nav-link">Espacios Compartidos</router-link>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" style="cursor: pointer;" @click="logout">Logout</a>

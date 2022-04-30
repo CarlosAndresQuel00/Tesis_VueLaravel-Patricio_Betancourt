@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             'password'  => bcrypt('123456'),
         ]);
         // \App\Models\User::factory(10)->create();
+        \App\Models\Client::factory(10)->create();
+        \App\Models\SharedSpace::factory(10)->create();
         $this->call(CommentSeeder::class);
     }
 }
