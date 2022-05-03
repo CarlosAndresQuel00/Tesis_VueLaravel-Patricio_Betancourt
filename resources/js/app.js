@@ -15,6 +15,9 @@ import Clients from './components/Clients/Client.vue'
 import CommentsCreate from './components/Clients/Create.vue'
 import SharedSpaces from './components/SharedSpaces/SharedSpace.vue'
 import Memberships from './components/Memberships/Membership.vue'
+import Assignments from './components/Assignments/Assignment.vue'
+import Reserves from './components/Reserves/Reserve.vue'
+import Payments from './components/Payments/Payment.vue'
 
 import Register from './components/Pages/Register.vue'
 import Login from './components/Pages/Login.vue'
@@ -51,6 +54,24 @@ const router = new VueRouter({
       path: '/memberships',
       component: Memberships,
       name: 'memberships',
+      meta: {requiredAuth: true}
+    },
+    {
+      path: '/assignments',
+      component: Assignments,
+      name: 'assignments',
+      meta: {requiredAuth: true}
+    },
+    {
+      path: '/reserves',
+      component: Reserves,
+      name: 'reserves',
+      meta: {requiredAuth: true}
+    },
+    {
+      path: '/payments',
+      component: Payments,
+      name: 'payments',
       meta: {requiredAuth: true}
     },
     {

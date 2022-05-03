@@ -22,9 +22,9 @@ class PaymentsTableSeeder extends Seeder
         foreach ($assignments as $assignment) {
             Payment::create([
                 'assig_id' =>$assignment->id,
-                'contrapartida_pay' =>$faker->text,
-                'entidadfin_pay' =>$faker->text,
-                'evidencia_pay' =>$faker->text,
+                'contrapartida_pay' =>$faker->state,
+                'entidadfin_pay' =>$faker->state,
+                'evidencia_pay' =>$faker->state,
                 'fechapago_pay' =>$faker->dateTime(),
                 'fecharegpago_pay' =>$faker->dateTime()
             ]);

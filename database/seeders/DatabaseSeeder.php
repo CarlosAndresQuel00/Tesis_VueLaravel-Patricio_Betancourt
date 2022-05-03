@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\SharedSpace::factory(10)->create();
         \App\Models\Membership::factory(10)->create();
         $this->call(CommentSeeder::class);
-        $this->call(PaymentsTableSeeder::class);
         $this->call(AssignmentsTableSeeder::class);
+        $this->call(PaymentsTableSeeder::class);
         $this->call(ReservesTableSeeder::class);
         Schema::enableForeignKeyConstraints();
     }

@@ -17,10 +17,9 @@ class ReserveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Assignment $assignment)
+    public function index()
     {
-        $reserve = $assignment->reserves;
-        return response()->json(ReserveResource::collection($reserve), 200);
+        return Reserve::get();
     }
 
     /**
@@ -29,10 +28,10 @@ class ReserveController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Assignment $assignment)
+    public function store(Request $request)
     {
-        $reserves = $assignment->reserves()->save(new Reserve($request->all()));
-        return response()->json(new ReserveResource($reserves), 201);
+        $reserve=new Reserve;
+        $reserve->create($request->all());
     }
 
     /**
@@ -41,10 +40,9 @@ class ReserveController extends Controller
      * @param  \App\Models\Reserve  $reserve
      * @return \Illuminate\Http\Response
      */
-    public function show(Reserve $reserve, Assignment $assignment)
+    public function show(Reserve $reserve)
     {
-        $reserves = $assignment->reserves()->where('id', $reserve->id)->firstOrFail();
-        return response()->json(new ReserveResource($reserves), 200);
+        return $reserve;
     }
 
     /**
@@ -54,10 +52,9 @@ class ReserveController extends Controller
      * @param  \App\Models\Reserve  $reserve
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Assignment $assignment)
+    public function update(Request $request, Reserve $reserve)
     {
-        $assignment->reserves()->update($request->all());
-        return response()->json($assignment, 200);
+        $reserve->update($request->all());
     }
 
     /**
@@ -66,9 +63,8 @@ class ReserveController extends Controller
      * @param  \App\Models\Reserve  $reserve
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Assignment $assignment)
+    public function destroy(Reserve $reserve)
     {
-        $assignment->reserves()->delete();
-        return response()->json(null, 204);
+        $reserve->delete();
     }
 }

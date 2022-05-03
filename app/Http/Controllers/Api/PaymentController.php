@@ -17,10 +17,9 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Assignment $assignment)
+    public function index()
     {
-        $payment = $assignment->payments;
-        return response()->json(PaymentResource::collection($payment), 200);
+        return Payment::get();
     }
 
     /**
@@ -29,10 +28,10 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Assignment $assignment)
+    public function store(Request $request)
     {
-        $payments = $assignment->payments()->save(new Payment($request->all()));
-        return response()->json(new PaymentResource($payments), 201);
+        $payment=new Payment;
+        $payment->create($request->all());
     }
 
     /**
@@ -41,10 +40,9 @@ class PaymentController extends Controller
      * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $payment, Assignment $assignment)
+    public function show(Payment $payment)
     {
-        $payments = $assignment->payments()->where('id', $payment->id)->firstOrFail();
-        return response()->json(new PaymentResource($payments), 200);
+        return $payment;
     }
 
     /**
@@ -54,10 +52,9 @@ class PaymentController extends Controller
      * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Assignment $assignment)
+    public function update(Request $request, Payment $payment)
     {
-        $assignment->payments()->update($request->all());
-        return response()->json($assignment, 200);
+        $payment->update($request->all());
     }
 
     /**
@@ -66,9 +63,8 @@ class PaymentController extends Controller
      * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Assignment $assignment)
+    public function destroy(Payment $payment)
     {
-        $assignment->payments()->delete();
-        return response()->json(null, 204);
+        $payment->delete();
     }
 }

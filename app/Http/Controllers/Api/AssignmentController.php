@@ -16,10 +16,9 @@ class AssignmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Membership $membership)
+    public function index()
     {
-        $assignment = $membership->assignments;
-        return response()->json(AssignmentResource::collection($assignment), 200);
+        return Assignment::get();
     }
 
     /**
@@ -28,10 +27,10 @@ class AssignmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Membership $membership)
+    public function store(Request $request)
     {
-        $assignments = $membership->assignments()->save(new Assignment($request->all()));
-        return response()->json(new AssignmentResource($assignments), 201);
+        $assignment=new Assignment;
+        $assignment->create($request->all());
     }
 
     /**
@@ -40,10 +39,9 @@ class AssignmentController extends Controller
      * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function show(Membership $membership, Assignment $assignment)
+    public function show(Assignment $assignment)
     {
-        $assignments = $membership->assignments()->where('id', $assignment->id)->firstOrFail();
-        return response()->json(new AssignmentResource($assignments), 200);
+        return $assignment;
     }
 
     /**
@@ -53,10 +51,9 @@ class AssignmentController extends Controller
      * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Membership $membership)
+    public function update(Request $request, Assignment $assignment)
     {
-        $membership->assignments()->update($request->all());
-        return response()->json($membership, 200);
+        $assignment->update($request->all());
     }
 
     /**
@@ -65,9 +62,8 @@ class AssignmentController extends Controller
      * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Membership $membership)
+    public function destroy(Assignment $assignment)
     {
-        $membership->assignments()->delete();
-        return response()->json(null, 204);
+        $assignment->delete();
     }
 }

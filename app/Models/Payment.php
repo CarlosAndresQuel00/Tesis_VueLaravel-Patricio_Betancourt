@@ -9,4 +9,9 @@ class Payment extends Model
 {
     use HasFactory;
     protected $fillable=['contrapartida_pay','entidadfin_pay','evidencia_pay','fechapago_pay','fecharegpago_pay','estado_pay'];
+
+    public function assignment()
+    {
+        return $this->belongsTo(Assignment::class);
+    }
 }

@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-primary bg-gradient">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto" v-if="isLoggedIn">
+                        <ul class="navbar-nav" v-if="isLoggedIn">
                             <li class="nav-item">
                                 <router-link active-class="active-menu" exact :to="{ name: 'clients' }" class="nav-link">Clientes</router-link>
                             </li>
@@ -12,6 +12,15 @@
                             </li>
                             <li class="nav-item">
                                 <router-link active-class="active-menu" exact :to="{ name: 'memberships' }" class="nav-link">Membresías</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link active-class="active-menu" exact :to="{ name: 'assignments' }" class="nav-link">Asignaciones</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link active-class="active-menu" exact :to="{ name: 'reserves' }" class="nav-link">Reservas</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link active-class="active-menu" exact :to="{ name: 'payments' }" class="nav-link">Pagos</router-link>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" style="cursor: pointer;" @click="logout">Logout</a>
