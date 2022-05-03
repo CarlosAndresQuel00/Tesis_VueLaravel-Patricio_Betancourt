@@ -11,6 +11,9 @@
                                 <router-link active-class="active-menu" exact :to="{ name: 'sharedSpaces' }" class="nav-link">Espacios Compartidos</router-link>
                             </li>
                             <li class="nav-item">
+                                <router-link active-class="active-menu" exact :to="{ name: 'memberships' }" class="nav-link">Membresías</router-link>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" style="cursor: pointer;" @click="logout">Logout</a>
                             </li>
                         </ul>

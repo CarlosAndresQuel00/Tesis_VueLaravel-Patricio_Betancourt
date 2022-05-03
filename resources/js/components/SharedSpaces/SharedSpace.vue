@@ -27,7 +27,7 @@
         </div>
         <!-- Button trigger modal -->
         <button @click="update=false; openModal();" class="btn btn-primary mt-4" >
-        Agregar Cliente
+        Agregar Espacio Compartido
         </button>
 
         <!-- Modal -->
@@ -42,9 +42,9 @@
                         <form @submit.prevent="save">
                             <div class="form-group">
                                 <label for="Nombre"></label>
-                                <input v-model="sharedSpace.nombre_ec" type="text" class="form-control" id="Nombre" placeholder="Nombre" name="">
+                                <input v-model="sharedSpace.nombre_ec" type="text" class="form-control" id="Nombre" placeholder="Nombre Espacio Compartido" name="">
                                 <label for="Detalle"></label>
-                                <textarea cols="30" rows="10" v-model="sharedSpace.detalle_ec" class="form-control" id="Detalle" placeholder="Detalle" name=""></textarea>
+                                <textarea cols="30" rows="10" v-model="sharedSpace.detalle_ec" class="form-control" id="Detalle" placeholder="Detalle Espacio Compartido" name=""></textarea>
                                 <label for="estadoEC"></label>
                                 <input v-model="sharedSpace.estado_ec" type="text" class="form-control" id="estadoEC" placeholder="Estado Espacio Compartido" name="">
                             </div>

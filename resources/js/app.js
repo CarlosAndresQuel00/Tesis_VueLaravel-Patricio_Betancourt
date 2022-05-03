@@ -14,6 +14,7 @@ import App from './components/App.vue'
 import Clients from './components/Clients/Client.vue'
 import CommentsCreate from './components/Clients/Create.vue'
 import SharedSpaces from './components/SharedSpaces/SharedSpace.vue'
+import Memberships from './components/Memberships/Membership.vue'
 
 import Register from './components/Pages/Register.vue'
 import Login from './components/Pages/Login.vue'
@@ -44,6 +45,12 @@ const router = new VueRouter({
       path: '/sharedSpaces',
       component: SharedSpaces,
       name: 'sharedSpaces',
+      meta: {requiredAuth: true}
+    },
+    {
+      path: '/memberships',
+      component: Memberships,
+      name: 'memberships',
       meta: {requiredAuth: true}
     },
     {
