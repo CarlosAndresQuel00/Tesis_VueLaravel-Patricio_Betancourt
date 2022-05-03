@@ -15,8 +15,8 @@ class CreateAssignmentsTable extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mem_id')->constrained("memberships")->onDelete('restrict');
-            $table->foreignId('cli_id')->constrained("clients")->onDelete('restrict');
+            $table->foreignId('mem_id')->constrained("memberships")->onDelete('cascade');
+            $table->foreignId('cli_id')->constrained("clients")->onDelete('cascade');
             $table->string('detalle_assig', 100);
             $table->datetime('fecha_assig');
             $table->enum('estado_assig', ['Activo', 'Inactivo']);
