@@ -15,15 +15,15 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('identificacion_cli');
-            $table->string('nombres_cli');
-            $table->string('apellidos_cli');
-            $table->string('empresa_cli');
-            $table->text('direccion_cli');
-            $table->string('email_cli')->unique();
-            $table->string('telf_cli');
-            $table->string('tipo_cli')->default('Titular');
-            $table->string('estado_cli')->default('Activo');
+            $table->string('identificacion_cli', 15);
+            $table->string('nombres_cli', 100);
+            $table->string('apellidos_cli', 100);
+            $table->string('empresa_cli', 100);
+            $table->string('direccion_cli', 300);
+            $table->string('email_cli', 100);
+            $table->string('telf_cli', 20);
+            $table->enum('tipo_cli', ['Titular', 'Asociado']);
+            $table->enum('estado_cli', ['Activo', 'Inactivo']);
             $table->timestamps();
         });
     }

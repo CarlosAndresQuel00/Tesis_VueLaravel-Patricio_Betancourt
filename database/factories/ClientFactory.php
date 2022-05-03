@@ -14,7 +14,7 @@ class ClientFactory extends Factory
     public function definition()
     {
         return [
-            'identificacion_cli' =>$this->faker->numerify('##########'),
+            'identificacion_cli' =>$this->faker->numerify('17########'),
             'nombres_cli' =>$this->faker->firstname,
             'apellidos_cli' =>$this->faker->lastname,
             'empresa_cli' =>$this->faker->company,

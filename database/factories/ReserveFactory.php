@@ -2,10 +2,18 @@
 
 namespace Database\Factories;
 
+use App\Models\Reserve;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class SharedSpaceFactory extends Factory
+class ReserveFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Reserve::class;
+
     /**
      * Define the model's default state.
      *
@@ -14,8 +22,7 @@ class SharedSpaceFactory extends Factory
     public function definition()
     {
         return [
-            'nombre_ec' =>$this->faker->company,
-            'detalle_ec' =>$this->faker->address
+            //
         ];
     }
 }

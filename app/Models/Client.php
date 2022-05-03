@@ -19,4 +19,9 @@ class Client extends Model
         'tipo_cli',
         'estado_cli',
     ];
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }

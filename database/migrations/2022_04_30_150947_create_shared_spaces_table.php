@@ -15,9 +15,9 @@ class CreateSharedSpacesTable extends Migration
     {
         Schema::create('shared_spaces', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_ec');
-            $table->text('detalle_ec');
-            $table->string('estado_ec');
+            $table->string('nombre_ec', 100);
+            $table->string('detalle_ec', 300);
+            $table->enum('estado_ec', ['Activo', 'Inactivo']);
             $table->timestamps();
         });
     }

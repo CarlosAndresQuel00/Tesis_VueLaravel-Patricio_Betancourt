@@ -2392,8 +2392,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.client.direccion_cli = data.direccion_cli;
         this.client.email_cli = data.email_cli;
         this.client.telf_cli = data.telf_cli;
-        this.client.tipo_cli = data.tipo_cli;
-        this.client.estado_cli = data.estado_cli;
       } else {
         this.id = 0;
         this.titleModal = "Crear Cliente";

@@ -3,6 +3,10 @@
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\AssignmentController;
+use App\Http\Controllers\Api\MembershipController;
+use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\ReserveController;
 use App\Http\Controllers\Api\SharedSpaceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +34,8 @@ Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanct
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('clients', ClientController::class);
     Route::apiResource('shared_spaces', SharedSpaceController::class);
+    Route::apiResource('memberships', MembershipController::class);
+    Route::apiResource('assignments', AssignmentController::class);
+    Route::apiResource('reserves', ReserveController::class);
+    Route::apiResource('payments', PaymentController::class);
 });
