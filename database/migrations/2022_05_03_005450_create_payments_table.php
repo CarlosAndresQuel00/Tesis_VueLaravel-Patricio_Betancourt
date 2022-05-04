@@ -15,7 +15,7 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('assig_id')->constrained("assignments")->onDelete('cascade');
+            $table->foreignId('assignment_id')->constrained("assignments")->onDelete('cascade');
             $table->string('contrapartida_pay', 100);
             $table->string('entidadfin_pay', 100)->nullable();
             $table->string('evidencia_pay', 100)->nullable();

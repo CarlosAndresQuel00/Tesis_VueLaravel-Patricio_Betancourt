@@ -3303,23 +3303,56 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       payment: {
-        assig_id: '',
-        contrapartida_pay: '',
-        entidadfin_pay: '',
-        evidencia_pay: '',
-        fechapago_pay: '',
-        fecharegpago_pay: '',
-        estado_pay: ''
+        assignment: '',
+        contrapartida: '',
+        entidad: '',
+        evidencia: '',
+        fechapago: '',
+        fecharegpago: '',
+        estado: ''
       },
       id: 0,
       update: true,
       modal: 0,
+      modal2: 0,
       titleModal: ' ',
-      payments: []
+      payments: [],
+      assignments: []
     };
   },
   methods: {
@@ -3333,7 +3366,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get('/api/payments');
+                return axios.get('/api/assignments/1/payments');
 
               case 2:
                 res = _context.sent;
@@ -3357,7 +3390,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios["delete"]('/api/payments/' + id);
+                return axios["delete"]('/api/assignments/1/payments/' + id);
 
               case 2:
                 res = _context2.sent;
@@ -3372,47 +3405,72 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    save: function save() {
+    link: function link(url) {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var res, _res;
-
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                if (!_this3.update) {
-                  _context3.next = 6;
-                  break;
-                }
+                _context3.next = 2;
+                return axios.get(url);
 
-                _context3.next = 3;
-                return axios.put('/api/payments/' + _this3.id, _this3.payment);
-
-              case 3:
+              case 2:
                 res = _context3.sent;
-                _context3.next = 9;
-                break;
+                _this3.assignments = res.data;
+                _this3.modal2 = 1;
 
-              case 6:
-                _context3.next = 8;
-                return axios.post('/api/payments', _this3.payment);
-
-              case 8:
-                _res = _context3.sent;
-
-              case 9:
-                _this3.closeModal();
-
-                _this3.list();
-
-              case 11:
+              case 5:
               case "end":
                 return _context3.stop();
             }
           }
         }, _callee3);
+      }))();
+    },
+    save: function save() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var res, _res;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                if (!_this4.update) {
+                  _context4.next = 6;
+                  break;
+                }
+
+                _context4.next = 3;
+                return axios.put('/api/assignments/1/payments/' + _this4.id, _this4.payment);
+
+              case 3:
+                res = _context4.sent;
+                _context4.next = 9;
+                break;
+
+              case 6:
+                _context4.next = 8;
+                return axios.post('/api/assignments/1/payments', _this4.payment);
+
+              case 8:
+                _res = _context4.sent;
+
+              case 9:
+                _this4.closeModal();
+
+                _this4.list();
+
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     },
     openModal: function openModal() {
@@ -3422,23 +3480,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.update) {
         this.id = data.id;
         this.titleModal = "Modificar Pago";
-        this.payment.assig_id = data.assig_id;
-        this.payment.contrapartida_pay = data.contrapartida_pay;
-        this.payment.entidadfin_pay = data.entidadfin_pay;
-        this.payment.evidencia_pay = data.evidencia_pay;
-        this.payment.fechapago_pay = data.fechapago_pay;
-        this.payment.fecharegpago_pay = data.fecharegpago_pay;
-        this.payment.estado_pay = data.estado_pay;
+        this.payment.assignment = data.assignment;
+        this.payment.contrapartida = data.contrapartida;
+        this.payment.entidad = data.entidad;
+        this.payment.evidencia = data.evidencia;
+        this.payment.fechapago = data.fechapago;
+        this.payment.fecharegpago = data.fecharegpago;
+        this.payment.estado = data.estado;
       } else {
         this.id = 0;
         this.titleModal = "Crear Pago";
-        this.payment.assig_id = '';
-        this.payment.contrapartida_pay = '';
-        this.payment.entidadfin_pay = '';
-        this.payment.evidencia_pay = '';
-        this.payment.fechapago_pay = '';
-        this.payment.fecharegpago_pay = '';
-        this.payment.estado_pay = '';
+        this.payment.assignment = '';
+        this.payment.contrapartida = '';
+        this.payment.entidad = '';
+        this.payment.evidencia = '';
+        this.payment.fechapago = '';
+        this.payment.fecharegpago = '';
+        this.payment.estado = '';
       }
     },
     closeModal: function closeModal() {
@@ -47459,19 +47517,36 @@ var render = function() {
                 _vm._v(_vm._s(payment.id))
               ]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(payment.assig_id))]),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: {
+                      "data-bs-toggle": "modal",
+                      "data-bs-target": "#exampleModalToggle2"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.link(payment.assignment)
+                      }
+                    }
+                  },
+                  [_vm._v("Ver")]
+                )
+              ]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(payment.contrapartida_pay))]),
+              _c("td", [_vm._v(_vm._s(payment.contrapartida))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(payment.entidadfin_pay))]),
+              _c("td", [_vm._v(_vm._s(payment.entidad))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(payment.evidencia_pay))]),
+              _c("td", [_vm._v(_vm._s(payment.evidencia))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(payment.fechapago_pay))]),
+              _c("td", [_vm._v(_vm._s(payment.fechapago))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(payment.fecharegpago_pay))]),
+              _c("td", [_vm._v(_vm._s(payment.fecharegpago))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(payment.estado_pay))]),
+              _c("td", [_vm._v(_vm._s(payment.estado))]),
               _vm._v(" "),
               _c("td", [
                 _c(
@@ -47568,8 +47643,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.assig_id,
-                        expression: "payment.assig_id"
+                        value: _vm.payment.assignment,
+                        expression: "payment.assignment"
                       }
                     ],
                     staticClass: "form-control",
@@ -47579,13 +47654,13 @@ var render = function() {
                       placeholder: "Asignación Cliente",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.assig_id },
+                    domProps: { value: _vm.payment.assignment },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(_vm.payment, "assig_id", $event.target.value)
+                        _vm.$set(_vm.payment, "assignment", $event.target.value)
                       }
                     }
                   }),
@@ -47597,8 +47672,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.contrapartida_pay,
-                        expression: "payment.contrapartida_pay"
+                        value: _vm.payment.contrapartida,
+                        expression: "payment.contrapartida"
                       }
                     ],
                     staticClass: "form-control",
@@ -47608,7 +47683,7 @@ var render = function() {
                       placeholder: "Contrapartida Pago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.contrapartida_pay },
+                    domProps: { value: _vm.payment.contrapartida },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
@@ -47616,7 +47691,7 @@ var render = function() {
                         }
                         _vm.$set(
                           _vm.payment,
-                          "contrapartida_pay",
+                          "contrapartida",
                           $event.target.value
                         )
                       }
@@ -47630,8 +47705,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.entidadfin_pay,
-                        expression: "payment.entidadfin_pay"
+                        value: _vm.payment.entidad,
+                        expression: "payment.entidad"
                       }
                     ],
                     staticClass: "form-control",
@@ -47641,17 +47716,13 @@ var render = function() {
                       placeholder: "Entidad Pago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.entidadfin_pay },
+                    domProps: { value: _vm.payment.entidad },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.payment,
-                          "entidadfin_pay",
-                          $event.target.value
-                        )
+                        _vm.$set(_vm.payment, "entidad", $event.target.value)
                       }
                     }
                   }),
@@ -47663,8 +47734,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.evidencia_pay,
-                        expression: "payment.evidencia_pay"
+                        value: _vm.payment.evidencia,
+                        expression: "payment.evidencia"
                       }
                     ],
                     staticClass: "form-control",
@@ -47674,17 +47745,13 @@ var render = function() {
                       placeholder: "Evidencia Pago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.evidencia_pay },
+                    domProps: { value: _vm.payment.evidencia },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.payment,
-                          "evidencia_pay",
-                          $event.target.value
-                        )
+                        _vm.$set(_vm.payment, "evidencia", $event.target.value)
                       }
                     }
                   }),
@@ -47696,8 +47763,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.fechapago_pay,
-                        expression: "payment.fechapago_pay"
+                        value: _vm.payment.fechapago,
+                        expression: "payment.fechapago"
                       }
                     ],
                     staticClass: "form-control",
@@ -47707,17 +47774,13 @@ var render = function() {
                       placeholder: "Fecha Pago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.fechapago_pay },
+                    domProps: { value: _vm.payment.fechapago },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(
-                          _vm.payment,
-                          "fechapago_pay",
-                          $event.target.value
-                        )
+                        _vm.$set(_vm.payment, "fechapago", $event.target.value)
                       }
                     }
                   }),
@@ -47729,8 +47792,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.fecharegpago_pay,
-                        expression: "payment.fecharegpago_pay"
+                        value: _vm.payment.fecharegpago,
+                        expression: "payment.fecharegpago"
                       }
                     ],
                     staticClass: "form-control",
@@ -47740,7 +47803,7 @@ var render = function() {
                       placeholder: "Fecha Regpago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.fecharegpago_pay },
+                    domProps: { value: _vm.payment.fecharegpago },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
@@ -47748,7 +47811,7 @@ var render = function() {
                         }
                         _vm.$set(
                           _vm.payment,
-                          "fecharegpago_pay",
+                          "fecharegpago",
                           $event.target.value
                         )
                       }
@@ -47762,8 +47825,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.estado_pay,
-                        expression: "payment.estado_pay"
+                        value: _vm.payment.estado,
+                        expression: "payment.estado"
                       }
                     ],
                     staticClass: "form-control",
@@ -47773,13 +47836,13 @@ var render = function() {
                       placeholder: "Estado Pago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.estado_pay },
+                    domProps: { value: _vm.payment.estado },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(_vm.payment, "estado_pay", $event.target.value)
+                        _vm.$set(_vm.payment, "estado", $event.target.value)
                       }
                     }
                   })
@@ -47820,7 +47883,101 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { show: _vm.modal2 },
+        attrs: {
+          id: "exampleModalToggle2",
+          "aria-hidden": "true",
+          "aria-labelledby": "exampleModalToggleLabel2",
+          tabindex: "-1"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h5",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "exampleModalToggleLabel2" }
+                },
+                [_vm._v("Asignación")]
+              ),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "btn-close",
+                attrs: {
+                  type: "button",
+                  "data-bs-dismiss": "modal",
+                  "aria-label": "Close"
+                },
+                on: {
+                  click: function($event) {
+                    _vm.modal2 = 0
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", [
+                _c("div", [
+                  _c("label", [_vm._v("Detalle Asignación: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.assignments.detalle) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("Fecha Asignación: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.assignments.fecha) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("Estado Asignación: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.assignments.estado) +
+                      "\n                        "
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    "data-bs-target": "#exampleModalToggle",
+                    "data-bs-toggle": "modal"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.modal2 = 0
+                    }
+                  }
+                },
+                [_vm._v("Atrás")]
+              )
+            ])
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
