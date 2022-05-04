@@ -7,8 +7,6 @@ use App\Models\Assignment;
 use App\Http\Resources\Payment as PaymentResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CommentStoreRequest;
-use App\Http\Resources\CommentResource;
 
 class PaymentController extends Controller
 {
@@ -17,9 +15,10 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Assignment $assignment)
     {
-        return Payment::get();
+        $payment = $assignment->payments;
+        return response()->json(PaymentResource::collection($payment), 200);
     }
 
     /**
@@ -28,10 +27,10 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Assignment $assignment)
     {
-        $payment=new Payment;
-        $payment->create($request->all());
+        $payments = $assignment->payments()->save(new Assignment($request->all()));
+        return response()->json(new PaymentResource($payments), 201);
     }
 
     /**
@@ -40,9 +39,10 @@ class PaymentController extends Controller
      * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $payment)
+    public function show(Assignment $assignment, Payment $payment)
     {
-        return $payment;
+        $payments = $assignment->payments()->where('id', $payment->id)->firstOrFail();
+        return response()->json(new PaymentResource($payments), 200);
     }
 
     /**

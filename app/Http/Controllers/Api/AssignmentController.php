@@ -18,7 +18,7 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        return Assignment::get();
+        return Assignment::all();
     }
 
     /**
@@ -29,8 +29,9 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        $assignment=new Assignment;
-        $assignment->create($request->all());
+        $assignment = new Assignment($request->all()); // New instance with data
+        $assignment->save();
+        return response()->json(new AssignmentResource($assignment), 201); // New instance
     }
 
     /**
@@ -41,7 +42,7 @@ class AssignmentController extends Controller
      */
     public function show(Assignment $assignment)
     {
-        return $assignment;
+        return response()->json(new AssignmentResource($assignment), 200);
     }
 
     /**
@@ -54,6 +55,7 @@ class AssignmentController extends Controller
     public function update(Request $request, Assignment $assignment)
     {
         $assignment->update($request->all());
+        return response()->json($assignment, 200);
     }
 
     /**
@@ -65,5 +67,6 @@ class AssignmentController extends Controller
     public function destroy(Assignment $assignment)
     {
         $assignment->delete();
+        return response()->json(null, 204); // Empty content or nothing, all okay.
     }
 }

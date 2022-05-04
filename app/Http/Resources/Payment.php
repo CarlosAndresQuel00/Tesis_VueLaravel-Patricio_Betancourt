@@ -16,7 +16,7 @@ class Payment extends JsonResource
     {
         return [
             'id' => $this->id,
-            'assignment' => '/api/assignments/' . $this->assig_id,
+            'assignment' => '/api/assignments/' . $this->assignment_id,
             'contrapartida' => $this->contrapartida_pay,
             'entidad' => $this->entidadfin_pay,
             'evidencia' => $this->evidencia_pay,
