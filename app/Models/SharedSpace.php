@@ -9,4 +9,9 @@ class SharedSpace extends Model
 {
     use HasFactory;
     protected $fillable = ['nombre_ec', 'detalle_ec', 'estado_ec'];
+
+    public function reserves()
+    {
+        return $this->hasMany(Reserve::class);
+    }
 }

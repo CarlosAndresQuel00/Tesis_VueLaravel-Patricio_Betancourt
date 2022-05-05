@@ -66,7 +66,7 @@ export default {
                         .then(response => {
                             console.log(response.data)
                             if (response.data.success) {
-                                window.location.href = "/clients"
+                                window.location.href = "/"
                             } else {
                                 this.error = response.data.message
                             }
@@ -81,7 +81,7 @@ export default {
     },
     beforeRouteEnter(to, from, next) {
         if (window.Laravel.isLoggedin) {
-            return next('clients');
+            return next('home');
         }
         next();
     }

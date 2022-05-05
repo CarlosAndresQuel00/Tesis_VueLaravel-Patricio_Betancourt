@@ -6,19 +6,17 @@
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Detalle</th>
-                    <th scope="col">Horas CO</th>
-                    <th scope="col">Horas ES</th>
-                    <th scope="col">Fecha-Corte</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col" colspan="2" class="text-center">Operaciones</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Detalle</th>
+                        <th scope="col">Horas CO</th>
+                        <th scope="col">Horas ES</th>
+                        <th scope="col">Fecha-Corte</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col" colspan="2" class="text-center">Operaciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="membership in memberships" :key="membership.id">
-                        <th scope="row">{{membership.id}}</th>
                         <td>{{membership.nombre_mem}}</td>
                         <td>{{membership.detalle_mem}}</td>
                         <td>{{membership.hcowork_mem}}</td>

@@ -19,7 +19,7 @@ class CreateReservesTable extends Migration
             $table->foreignId('ec_id')->constrained("shared_spaces")->onDelete('cascade');
             $table->string('detalle_rsv', 100);
             $table->datetime('fechahi_rsv');
-            $table->dateTime('fechahf_rsv');
+            $table->datetime('fechahf_rsv');
             $table->enum('estado_rsv', ['Activo', 'Inactivo']);
             $table->timestamps();
         });

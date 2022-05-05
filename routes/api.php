@@ -31,24 +31,29 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
-Route::get('assignments', [AssignmentController::class, 'index']);
-
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('clients', ClientController::class);
     Route::apiResource('shared_spaces', SharedSpaceController::class);
     Route::apiResource('memberships', MembershipController::class);
-    Route::apiResource('reserves', ReserveController::class);
 
     // Assignments
+    Route::get('assignments', [AssignmentController::class, 'index']);
     Route::get('assignments/{assignment}', [AssignmentController::class, 'show']);
     Route::post('assignments', [AssignmentController::class, 'store']);
     Route::put('assignments/{assignment}',  [AssignmentController::class, 'update']);
-    Route::delete('assignments/{assignment}', [AssignmentController::class, 'delete']);
+    Route::delete('assignments/{assignment}', [AssignmentController::class, 'destroy']);
+
+    // Reserves
+    Route::get('reserves', [ReserveController::class, 'index']);
+    Route::get('reserves/{reserve}', [ReserveController::class, 'show']);
+    Route::post('reserves', [ReserveController::class, 'store']);
+    Route::put('reserves/{reserve}',  [ReserveController::class, 'update']);
+    Route::delete('reserves/{reserve}', [ReserveController::class, 'destroy']);
 
     // Payments
-    Route::get('assignments/{assignment}/payments', [PaymentController::class, 'index']);
-    Route::get('assignments/{assignment}/payments/{payment}', [PaymentController::class, 'show']);
-    Route::post('assignments/{assignment}/payments', [PaymentController::class, 'store']);
-    Route::put('assignments/{assignment}/payments/{payment}',  [PaymentController::class, 'update']);
-    Route::delete('assignments/{assignment}/payments/{payment}', [PaymentController::class, 'delete']);
+    Route::get('payments', [PaymentController::class, 'index']);
+    Route::get('payments/{payment}', [PaymentController::class, 'show']);
+    Route::post('payments', [PaymentController::class, 'store']);
+    Route::put('payments/{payment}',  [PaymentController::class, 'update']);
+    Route::delete('payments/{payment}', [PaymentController::class, 'destroy']);
 });

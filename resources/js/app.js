@@ -94,7 +94,7 @@ router.beforeEach(async (to, from, next) => {
       return next();
     } else if (!to.meta.requiredAuth) {
       if (window.Laravel.isLoggedin) {
-        return next({ path: "/clients" });
+        return next({ path: "/" });
       }
     } else if (to.meta.requiredAuth) {
       if (!window.Laravel.isLoggedin) {

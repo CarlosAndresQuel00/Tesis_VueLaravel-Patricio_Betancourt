@@ -2138,6 +2138,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "App",
   data: function data() {
@@ -2260,6 +2266,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2271,10 +2337,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         estado_assig: ''
       },
       id: 0,
+      mem: ' ',
+      memId: ' ',
+      cli: ' ',
+      cliId: ' ',
       update: true,
       modal: 0,
+      modal2: 0,
+      modal3: 0,
       titleModal: ' ',
-      assignments: []
+      assignments: [],
+      memberships: [],
+      clients: []
     };
   },
   methods: {
@@ -2327,42 +2401,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    save: function save() {
+    link: function link(url) {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var res, _res;
-
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                if (!_this3.update) {
-                  _context3.next = 6;
-                  break;
-                }
+                _context3.next = 2;
+                return axios.get(url);
 
-                _context3.next = 3;
-                return axios.put('/api/assignments/' + _this3.id, _this3.assignment);
-
-              case 3:
+              case 2:
                 res = _context3.sent;
-                _context3.next = 9;
-                break;
+                _this3.memberships = res.data;
+                _this3.modal2 = 1;
 
-              case 6:
-                _context3.next = 8;
-                return axios.post('/api/assignments', _this3.assignment);
-
-              case 8:
-                _res = _context3.sent;
-
-              case 9:
-                _this3.closeModal();
-
-                _this3.list();
-
-              case 11:
+              case 5:
               case "end":
                 return _context3.stop();
             }
@@ -2370,18 +2426,90 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
+    link2: function link2(url) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.get(url);
+
+              case 2:
+                res = _context4.sent;
+                _this4.clients = res.data;
+                _this4.modal3 = 1;
+
+              case 5:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    save: function save() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var res, _res;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                if (!_this5.update) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                _context5.next = 3;
+                return axios.put('/api/assignments/' + _this5.id, _this5.assignment);
+
+              case 3:
+                res = _context5.sent;
+                _context5.next = 9;
+                break;
+
+              case 6:
+                _context5.next = 8;
+                return axios.post('/api/assignments', _this5.assignment);
+
+              case 8:
+                _res = _context5.sent;
+
+              case 9:
+                _this5.closeModal();
+
+                _this5.list();
+
+              case 11:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
     openModal: function openModal() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       this.modal = 1;
 
       if (this.update) {
+        this.mem = data.membership.split("memberships");
+        this.memId = this.mem[1].split("/");
+        this.cli = data.client.split("clients");
+        this.cliId = this.cli[1].split("/");
         this.id = data.id;
         this.titleModal = "Modificar Assignación";
-        this.assignment.mem_id = data.mem_id;
-        this.assignment.cli_id = data.cli_id;
-        this.assignment.detalle_assig = data.detalle_assig;
-        this.assignment.fecha_assig = data.fecha_assig;
-        this.assignment.estado_assig = data.estado_assig;
+        this.assignment.mem_id = this.memId[1];
+        this.assignment.cli_id = this.cliId[1];
+        this.assignment.detalle_assig = data.detalle;
+        this.assignment.fecha_assig = data.fecha;
+        this.assignment.estado_assig = data.estado;
       } else {
         this.id = 0;
         this.titleModal = "Crear Assignación";
@@ -2422,8 +2550,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
 //
 //
 //
@@ -2845,8 +2971,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3074,7 +3198,7 @@ __webpack_require__.r(__webpack_exports__);
             console.log(response.data);
 
             if (response.data.success) {
-              window.location.href = "/clients";
+              window.location.href = "/";
             } else {
               _this.error = response.data.message;
             }
@@ -3088,7 +3212,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     if (window.Laravel.isLoggedin) {
-      return next('clients');
+      return next('home');
     }
 
     next();
@@ -3196,7 +3320,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     if (window.Laravel.isLoggedin) {
-      return next('clients');
+      return next('home');
     }
 
     next();
@@ -3332,21 +3456,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       payment: {
-        assignment: '',
-        contrapartida: '',
-        entidad: '',
-        evidencia: '',
-        fechapago: '',
-        fecharegpago: '',
-        estado: ''
+        assignment_id: '',
+        contrapartida_pay: '',
+        entidadfin_pay: '',
+        evidencia_pay: '',
+        fechapago_pay: '',
+        fecharegpago_pay: '',
+        estado_pay: ''
       },
       id: 0,
+      assign: ' ',
+      assignId: ' ',
       update: true,
       modal: 0,
       modal2: 0,
@@ -3366,7 +3490,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get('/api/assignments/1/payments');
+                return axios.get('/api/payments');
 
               case 2:
                 res = _context.sent;
@@ -3390,7 +3514,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios["delete"]('/api/assignments/1/payments/' + id);
+                return axios["delete"]('/api/payments/' + id);
 
               case 2:
                 res = _context2.sent;
@@ -3446,7 +3570,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
 
                 _context4.next = 3;
-                return axios.put('/api/assignments/1/payments/' + _this4.id, _this4.payment);
+                return axios.put('/api/payments/' + _this4.id, _this4.payment);
 
               case 3:
                 res = _context4.sent;
@@ -3455,7 +3579,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 _context4.next = 8;
-                return axios.post('/api/assignments/1/payments', _this4.payment);
+                return axios.post('/api/payments', _this4.payment);
 
               case 8:
                 _res = _context4.sent;
@@ -3478,25 +3602,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.modal = 1;
 
       if (this.update) {
+        this.assign = data.assignment.split("assignments");
+        this.assignId = this.assign[1].split("/");
         this.id = data.id;
         this.titleModal = "Modificar Pago";
-        this.payment.assignment = data.assignment;
-        this.payment.contrapartida = data.contrapartida;
-        this.payment.entidad = data.entidad;
-        this.payment.evidencia = data.evidencia;
-        this.payment.fechapago = data.fechapago;
-        this.payment.fecharegpago = data.fecharegpago;
-        this.payment.estado = data.estado;
+        this.payment.assignment_id = this.assignId[1];
+        this.payment.contrapartida_pay = data.contrapartida;
+        this.payment.entidadfin_pay = data.entidad;
+        this.payment.evidencia_pay = data.evidencia;
+        this.payment.fechapago_pay = data.fechapago;
+        this.payment.fecharegpago_pay = data.fecharegpago;
+        this.payment.estado_pay = data.estado;
       } else {
         this.id = 0;
         this.titleModal = "Crear Pago";
-        this.payment.assignment = '';
-        this.payment.contrapartida = '';
-        this.payment.entidad = '';
-        this.payment.evidencia = '';
-        this.payment.fechapago = '';
-        this.payment.fecharegpago = '';
-        this.payment.estado = '';
+        this.payment.assignment_id = '';
+        this.payment.contrapartida_pay = '';
+        this.payment.entidadfin_pay = '';
+        this.payment.evidencia_pay = '';
+        this.payment.fechapago_pay = '';
+        this.payment.fecharegpago_pay = '';
+        this.payment.estado_pay = '';
       }
     },
     closeModal: function closeModal() {
@@ -3604,6 +3730,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3616,10 +3802,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         estado_rsv: ''
       },
       id: 0,
+      assign: ' ',
+      assignId: ' ',
+      ec: ' ',
+      ecId: ' ',
       update: true,
       modal: 0,
+      modal2: 0,
+      modal3: 0,
       titleModal: ' ',
-      reserves: []
+      reserves: [],
+      assignments: [],
+      sharedSpaces: []
     };
   },
   methods: {
@@ -3672,42 +3866,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    save: function save() {
+    link: function link(url) {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var res, _res;
-
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                if (!_this3.update) {
-                  _context3.next = 6;
-                  break;
-                }
+                _context3.next = 2;
+                return axios.get(url);
 
-                _context3.next = 3;
-                return axios.put('/api/reserves/' + _this3.id, _this3.reserve);
-
-              case 3:
+              case 2:
                 res = _context3.sent;
-                _context3.next = 9;
-                break;
+                _this3.assignments = res.data;
+                _this3.modal2 = 1;
 
-              case 6:
-                _context3.next = 8;
-                return axios.post('/api/reserves', _this3.reserve);
-
-              case 8:
-                _res = _context3.sent;
-
-              case 9:
-                _this3.closeModal();
-
-                _this3.list();
-
-              case 11:
+              case 5:
               case "end":
                 return _context3.stop();
             }
@@ -3715,19 +3891,91 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
+    link2: function link2(url) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.get(url);
+
+              case 2:
+                res = _context4.sent;
+                _this4.sharedSpaces = res.data;
+                _this4.modal3 = 1;
+
+              case 5:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    save: function save() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var res, _res;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                if (!_this5.update) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                _context5.next = 3;
+                return axios.put('/api/reserves/' + _this5.id, _this5.reserve);
+
+              case 3:
+                res = _context5.sent;
+                _context5.next = 9;
+                break;
+
+              case 6:
+                _context5.next = 8;
+                return axios.post('/api/reserves', _this5.reserve);
+
+              case 8:
+                _res = _context5.sent;
+
+              case 9:
+                _this5.closeModal();
+
+                _this5.list();
+
+              case 11:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
     openModal: function openModal() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       this.modal = 1;
 
       if (this.update) {
+        this.assign = data.assignment.split("assignments");
+        this.assignId = this.assign[1].split("/");
+        this.ec = data.sharedSpace.split("shared_spaces");
+        this.ecId = this.ec[1].split("/");
         this.id = data.id;
         this.titleModal = "Modificar Reserva";
-        this.reserve.assig_id = data.assig_id;
-        this.reserve.ec_id = data.ec_id;
-        this.reserve.detalle_rsv = data.detalle_rsv;
-        this.reserve.fechahi_rsv = data.fechahi_rsv;
-        this.reserve.fechahf_rsv = data.fechahf_rsv;
-        this.reserve.estado_rsv = data.estado_rsv;
+        this.reserve.assig_id = this.assignId[1];
+        this.reserve.ec_id = this.ecId[1];
+        this.reserve.detalle_rsv = data.detalle;
+        this.reserve.fechahi_rsv = data.fechai;
+        this.reserve.fechahf_rsv = data.fechaf;
+        this.reserve.estado_rsv = data.estado;
       } else {
         this.id = 0;
         this.titleModal = "Crear Reserva";
@@ -3769,8 +4017,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
 //
 //
 //
@@ -4117,7 +4363,7 @@ router.beforeEach( /*#__PURE__*/function () {
             }
 
             return _context.abrupt("return", next({
-              path: "/clients"
+              path: "/"
             }));
 
           case 7:
@@ -45514,6 +45760,26 @@ var render = function() {
                             attrs: {
                               "active-class": "active-menu",
                               exact: "",
+                              to: { name: "home" }
+                            }
+                          },
+                          [_vm._v("Inicio")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: {
+                              "active-class": "active-menu",
+                              exact: "",
                               to: { name: "clients" }
                             }
                           },
@@ -45642,6 +45908,19 @@ var render = function() {
                       [
                         _c(
                           "router-link",
+                          { staticClass: "nav-link", attrs: { to: "/" } },
+                          [_vm._v("Inicio")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
                           { staticClass: "nav-link", attrs: { to: "/login" } },
                           [_vm._v("Log in")]
                         )
@@ -45731,19 +46010,49 @@ var render = function() {
           "tbody",
           _vm._l(_vm.assignments, function(assignment) {
             return _c("tr", { key: assignment.id }, [
-              _c("th", { attrs: { scope: "row" } }, [
-                _vm._v(_vm._s(assignment.id))
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: {
+                      "data-bs-toggle": "modal",
+                      "data-bs-target": "#exampleModalToggle2"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.link(assignment.membership)
+                      }
+                    }
+                  },
+                  [_vm._v("Ver Info")]
+                )
               ]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(assignment.mem_id))]),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: {
+                      "data-bs-toggle": "modal",
+                      "data-bs-target": "#exampleModalToggle3"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.link2(assignment.client)
+                      }
+                    }
+                  },
+                  [_vm._v("Ver Info")]
+                )
+              ]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(assignment.cli_id))]),
+              _c("td", [_vm._v(_vm._s(assignment.detalle))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(assignment.detalle_assig))]),
+              _c("td", [_vm._v(_vm._s(assignment.fecha))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(assignment.fecha_assig))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(assignment.estado_assig))]),
+              _c("td", [_vm._v(_vm._s(assignment.estado))]),
               _vm._v(" "),
               _c("td", [
                 _c(
@@ -46026,7 +46335,195 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { show: _vm.modal2 },
+        attrs: {
+          id: "exampleModalToggle2",
+          "aria-hidden": "true",
+          "aria-labelledby": "exampleModalToggleLabel2",
+          tabindex: "-1"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h5",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "exampleModalToggleLabel2" }
+                },
+                [_vm._v("Membresía")]
+              ),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "btn-close",
+                attrs: {
+                  type: "button",
+                  "data-bs-dismiss": "modal",
+                  "aria-label": "Close"
+                },
+                on: {
+                  click: function($event) {
+                    _vm.modal2 = 0
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", [
+                _c("div", [
+                  _c("label", [_vm._v("Nombre Membresía: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.memberships.nombre_mem) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("Detalle Membresía: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.memberships.detalle_mem) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("Estado Membresía: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.memberships.estado_mem) +
+                      "\n                        "
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    "data-bs-target": "#exampleModalToggle2",
+                    "data-bs-toggle": "modal"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.modal2 = 0
+                    }
+                  }
+                },
+                [_vm._v("Atrás")]
+              )
+            ])
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { show: _vm.modal3 },
+        attrs: {
+          id: "exampleModalToggle3",
+          "aria-hidden": "true",
+          "aria-labelledby": "exampleModalToggleLabel3",
+          tabindex: "-1"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h5",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "exampleModalToggleLabel3" }
+                },
+                [_vm._v("Cliente")]
+              ),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "btn-close",
+                attrs: {
+                  type: "button",
+                  "data-bs-dismiss": "modal",
+                  "aria-label": "Close"
+                },
+                on: {
+                  click: function($event) {
+                    _vm.modal3 = 0
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", [
+                _c("div", [
+                  _c("label", [_vm._v("Identificación Cliente: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.clients.identificacion_cli) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("Dirección Cliente: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.clients.direccion_cli) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("Correo Electrónico Cliente: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.clients.email_cli) +
+                      "\n                        "
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    "data-bs-target": "#exampleModalToggle3",
+                    "data-bs-toggle": "modal"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.modal3 = 0
+                    }
+                  }
+                },
+                [_vm._v("Atrás")]
+              )
+            ])
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -46036,11 +46533,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "table-dark" }, [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Membresía")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id Membresía")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id Cliente")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cliente")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Detalle")]),
         _vm._v(" "),
@@ -46092,10 +46587,6 @@ var render = function() {
           "tbody",
           _vm._l(_vm.clients, function(client) {
             return _c("tr", { key: client.id }, [
-              _c("th", { attrs: { scope: "row" } }, [
-                _vm._v(_vm._s(client.id))
-              ]),
-              _vm._v(" "),
               _c("td", [_vm._v(_vm._s(client.identificacion_cli))]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(client.nombres_cli))]),
@@ -46521,8 +47012,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "table-dark" }, [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id")]),
-        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Identificación")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombres")]),
@@ -46704,10 +47193,6 @@ var render = function() {
           "tbody",
           _vm._l(_vm.memberships, function(membership) {
             return _c("tr", { key: membership.id }, [
-              _c("th", { attrs: { scope: "row" } }, [
-                _vm._v(_vm._s(membership.id))
-              ]),
-              _vm._v(" "),
               _c("td", [_vm._v(_vm._s(membership.nombre_mem))]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(membership.detalle_mem))]),
@@ -47052,8 +47537,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "table-dark" }, [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id")]),
-        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Detalle")]),
@@ -47513,10 +47996,6 @@ var render = function() {
           "tbody",
           _vm._l(_vm.payments, function(payment) {
             return _c("tr", { key: payment.id }, [
-              _c("th", { attrs: { scope: "row" } }, [
-                _vm._v(_vm._s(payment.id))
-              ]),
-              _vm._v(" "),
               _c("td", [
                 _c(
                   "button",
@@ -47532,7 +48011,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Ver")]
+                  [_vm._v("Ver Info")]
                 )
               ]),
               _vm._v(" "),
@@ -47643,8 +48122,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.assignment,
-                        expression: "payment.assignment"
+                        value: _vm.payment.assignment_id,
+                        expression: "payment.assignment_id"
                       }
                     ],
                     staticClass: "form-control",
@@ -47654,13 +48133,17 @@ var render = function() {
                       placeholder: "Asignación Cliente",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.assignment },
+                    domProps: { value: _vm.payment.assignment_id },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(_vm.payment, "assignment", $event.target.value)
+                        _vm.$set(
+                          _vm.payment,
+                          "assignment_id",
+                          $event.target.value
+                        )
                       }
                     }
                   }),
@@ -47672,8 +48155,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.contrapartida,
-                        expression: "payment.contrapartida"
+                        value: _vm.payment.contrapartida_pay,
+                        expression: "payment.contrapartida_pay"
                       }
                     ],
                     staticClass: "form-control",
@@ -47683,7 +48166,7 @@ var render = function() {
                       placeholder: "Contrapartida Pago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.contrapartida },
+                    domProps: { value: _vm.payment.contrapartida_pay },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
@@ -47691,7 +48174,7 @@ var render = function() {
                         }
                         _vm.$set(
                           _vm.payment,
-                          "contrapartida",
+                          "contrapartida_pay",
                           $event.target.value
                         )
                       }
@@ -47705,8 +48188,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.entidad,
-                        expression: "payment.entidad"
+                        value: _vm.payment.entidadfin_pay,
+                        expression: "payment.entidadfin_pay"
                       }
                     ],
                     staticClass: "form-control",
@@ -47716,13 +48199,17 @@ var render = function() {
                       placeholder: "Entidad Pago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.entidad },
+                    domProps: { value: _vm.payment.entidadfin_pay },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(_vm.payment, "entidad", $event.target.value)
+                        _vm.$set(
+                          _vm.payment,
+                          "entidadfin_pay",
+                          $event.target.value
+                        )
                       }
                     }
                   }),
@@ -47734,8 +48221,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.evidencia,
-                        expression: "payment.evidencia"
+                        value: _vm.payment.evidencia_pay,
+                        expression: "payment.evidencia_pay"
                       }
                     ],
                     staticClass: "form-control",
@@ -47745,13 +48232,17 @@ var render = function() {
                       placeholder: "Evidencia Pago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.evidencia },
+                    domProps: { value: _vm.payment.evidencia_pay },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(_vm.payment, "evidencia", $event.target.value)
+                        _vm.$set(
+                          _vm.payment,
+                          "evidencia_pay",
+                          $event.target.value
+                        )
                       }
                     }
                   }),
@@ -47763,8 +48254,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.fechapago,
-                        expression: "payment.fechapago"
+                        value: _vm.payment.fechapago_pay,
+                        expression: "payment.fechapago_pay"
                       }
                     ],
                     staticClass: "form-control",
@@ -47774,13 +48265,17 @@ var render = function() {
                       placeholder: "Fecha Pago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.fechapago },
+                    domProps: { value: _vm.payment.fechapago_pay },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(_vm.payment, "fechapago", $event.target.value)
+                        _vm.$set(
+                          _vm.payment,
+                          "fechapago_pay",
+                          $event.target.value
+                        )
                       }
                     }
                   }),
@@ -47792,18 +48287,18 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.fecharegpago,
-                        expression: "payment.fecharegpago"
+                        value: _vm.payment.fecharegpago_pay,
+                        expression: "payment.fecharegpago_pay"
                       }
                     ],
                     staticClass: "form-control",
                     attrs: {
-                      type: "email",
+                      type: "text",
                       id: "FechaRegpago",
                       placeholder: "Fecha Regpago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.fecharegpago },
+                    domProps: { value: _vm.payment.fecharegpago_pay },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
@@ -47811,7 +48306,7 @@ var render = function() {
                         }
                         _vm.$set(
                           _vm.payment,
-                          "fecharegpago",
+                          "fecharegpago_pay",
                           $event.target.value
                         )
                       }
@@ -47825,8 +48320,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.payment.estado,
-                        expression: "payment.estado"
+                        value: _vm.payment.estado_pay,
+                        expression: "payment.estado_pay"
                       }
                     ],
                     staticClass: "form-control",
@@ -47836,13 +48331,13 @@ var render = function() {
                       placeholder: "Estado Pago",
                       name: ""
                     },
-                    domProps: { value: _vm.payment.estado },
+                    domProps: { value: _vm.payment.estado_pay },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(_vm.payment, "estado", $event.target.value)
+                        _vm.$set(_vm.payment, "estado_pay", $event.target.value)
                       }
                     }
                   })
@@ -47962,7 +48457,7 @@ var render = function() {
                 {
                   staticClass: "btn btn-primary",
                   attrs: {
-                    "data-bs-target": "#exampleModalToggle",
+                    "data-bs-target": "#exampleModalToggle2",
                     "data-bs-toggle": "modal"
                   },
                   on: {
@@ -47987,9 +48482,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "table-dark" }, [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id Asignación")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Asignación")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Contrapartida")]),
         _vm._v(" "),
@@ -48047,21 +48540,51 @@ var render = function() {
           "tbody",
           _vm._l(_vm.reserves, function(reserve) {
             return _c("tr", { key: reserve.id }, [
-              _c("th", { attrs: { scope: "row" } }, [
-                _vm._v(_vm._s(reserve.id))
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: {
+                      "data-bs-toggle": "modal",
+                      "data-bs-target": "#exampleModalToggle2"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.link(reserve.assignment)
+                      }
+                    }
+                  },
+                  [_vm._v("Ver Info")]
+                )
               ]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(reserve.assig_id))]),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: {
+                      "data-bs-toggle": "modal",
+                      "data-bs-target": "#exampleModalToggle3"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.link2(reserve.sharedSpace)
+                      }
+                    }
+                  },
+                  [_vm._v("Ver Info")]
+                )
+              ]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(reserve.ec_id))]),
+              _c("td", [_vm._v(_vm._s(reserve.detalle))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(reserve.detalle_rsv))]),
+              _c("td", [_vm._v(_vm._s(reserve.fechai))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(reserve.fechahi_rsv))]),
+              _c("td", [_vm._v(_vm._s(reserve.fechaf))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(reserve.fechahf_rsv))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(reserve.estado_rsv))]),
+              _c("td", [_vm._v(_vm._s(reserve.estado))]),
               _vm._v(" "),
               _c("td", [
                 _c(
@@ -48373,7 +48896,195 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { show: _vm.modal2 },
+        attrs: {
+          id: "exampleModalToggle2",
+          "aria-hidden": "true",
+          "aria-labelledby": "exampleModalToggleLabel2",
+          tabindex: "-1"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h5",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "exampleModalToggleLabel2" }
+                },
+                [_vm._v("Asignación")]
+              ),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "btn-close",
+                attrs: {
+                  type: "button",
+                  "data-bs-dismiss": "modal",
+                  "aria-label": "Close"
+                },
+                on: {
+                  click: function($event) {
+                    _vm.modal2 = 0
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", [
+                _c("div", [
+                  _c("label", [_vm._v("Detalle Asignación: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.assignments.detalle) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("Fecha Asignación: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.assignments.fecha) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("Estado Asignación: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.assignments.estado) +
+                      "\n                        "
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    "data-bs-target": "#exampleModalToggle2",
+                    "data-bs-toggle": "modal"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.modal2 = 0
+                    }
+                  }
+                },
+                [_vm._v("Atrás")]
+              )
+            ])
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { show: _vm.modal3 },
+        attrs: {
+          id: "exampleModalToggle3",
+          "aria-hidden": "true",
+          "aria-labelledby": "exampleModalToggleLabel3",
+          tabindex: "-1"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h5",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "exampleModalToggleLabel3" }
+                },
+                [_vm._v("Espacio Compartido")]
+              ),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "btn-close",
+                attrs: {
+                  type: "button",
+                  "data-bs-dismiss": "modal",
+                  "aria-label": "Close"
+                },
+                on: {
+                  click: function($event) {
+                    _vm.modal3 = 0
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", [
+                _c("div", [
+                  _c("label", [_vm._v("Nombre Espacio Compartido: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.sharedSpaces.nombre_ec) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("Detalle Espacio Compartido: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.sharedSpaces.detalle_ec) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("Estado Espacio Compartido: ")]),
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.sharedSpaces.estado_ec) +
+                      "\n                        "
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    "data-bs-target": "#exampleModalToggle3",
+                    "data-bs-toggle": "modal"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.modal3 = 0
+                    }
+                  }
+                },
+                [_vm._v("Atrás")]
+              )
+            ])
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -48383,13 +49094,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "table-dark" }, [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Asignación")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id Asignación")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [
-          _vm._v("Id Espacio Compartido")
-        ]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Espacio Compartido")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Detalle")]),
         _vm._v(" "),
@@ -48445,10 +49152,6 @@ var render = function() {
           "tbody",
           _vm._l(_vm.sharedSpaces, function(sharedSpace) {
             return _c("tr", { key: sharedSpace.id }, [
-              _c("th", { attrs: { scope: "row" } }, [
-                _vm._v(_vm._s(sharedSpace.id))
-              ]),
-              _vm._v(" "),
               _c("td", [_vm._v(_vm._s(sharedSpace.nombre_ec))]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(sharedSpace.detalle_ec))]),
@@ -48689,8 +49392,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "table-dark" }, [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Id")]),
-        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Detalle")]),

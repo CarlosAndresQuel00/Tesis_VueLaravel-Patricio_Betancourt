@@ -20,7 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->string('entidadfin_pay', 100)->nullable();
             $table->string('evidencia_pay', 100)->nullable();
             $table->datetime('fechapago_pay');
-            $table->dateTime('fecharegpago_pay');
+            $table->datetime('fecharegpago_pay');
             $table->enum('estado_pay', ['Procesado', 'Pendiente']);
             $table->timestamps();
         });

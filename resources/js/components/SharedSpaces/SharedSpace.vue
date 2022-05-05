@@ -6,16 +6,14 @@
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Detalle</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col" colspan="2" class="text-center">Operaciones</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Detalle</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col" colspan="2" class="text-center">Operaciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="sharedSpace in sharedSpaces" :key="sharedSpace.id">
-                        <th scope="row">{{sharedSpace.id}}</th>
                         <td>{{sharedSpace.nombre_ec}}</td>
                         <td>{{sharedSpace.detalle_ec}}</td>
                         <td>{{sharedSpace.estado_ec}}</td>

@@ -6,22 +6,20 @@
             <table class="table table-hover">
                 <thead class="table-dark">
                     <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Identificación</th>
-                    <th scope="col">Nombres</th>
-                    <th scope="col">Apellidos</th>
-                    <th scope="col">Empresa</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col" colspan="2" class="text-center">Operaciones</th>
+                        <th scope="col">Identificación</th>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Empresa</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col" colspan="2" class="text-center">Operaciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="client in clients" :key="client.id">
-                        <th scope="row">{{client.id}}</th>
                         <td>{{client.identificacion_cli}}</td>
                         <td>{{client.nombres_cli}}</td>
                         <td>{{client.apellidos_cli}}</td>

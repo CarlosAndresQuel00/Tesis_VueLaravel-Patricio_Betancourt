@@ -19,7 +19,7 @@ class ReserveController extends Controller
      */
     public function index()
     {
-        return Reserve::get();
+        return response()->json(ReserveResource::collection(Reserve::all()), 200);
     }
 
     /**
@@ -42,7 +42,7 @@ class ReserveController extends Controller
      */
     public function show(Reserve $reserve)
     {
-        return $reserve;
+        return response()->json(new ReserveResource($reserve), 200);
     }
 
     /**

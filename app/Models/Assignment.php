@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Assignment extends Model
 {
     use HasFactory;
-    protected $fillable = ['detalle_assig', 'fecha_assig', 'estado_assig'];
+    protected $fillable = ['mem_id', 'cli_id', 'detalle_assig', 'fecha_assig', 'estado_assig'];
 
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function reserves()
+    {
+        return $this->hasMany(Reserve::class);
     }
 
     public function client()

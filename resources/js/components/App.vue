@@ -5,6 +5,9 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul class="navbar-nav" v-if="isLoggedIn">
                             <li class="nav-item">
+                                <router-link active-class="active-menu" exact :to="{ name: 'home' }" class="nav-link">Inicio</router-link>
+                            </li>
+                            <li class="nav-item">
                                 <router-link active-class="active-menu" exact :to="{ name: 'clients' }" class="nav-link">Clientes</router-link>
                             </li>
                             <li class="nav-item">
@@ -27,6 +30,9 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav" v-else>
+                            <li class="nav-item">
+                                <router-link to="/" class="nav-link">Inicio</router-link>
+                            </li>
                             <li class="nav-item">
                                 <router-link to="/login" class="nav-link">Log in</router-link>
                             </li>
